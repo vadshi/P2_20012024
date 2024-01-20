@@ -14,12 +14,12 @@ print(point1.x)  # 7
 print(point2.x)  # 7
 
 point1.x = 10
-print(point1.x)  # 10
-print(point2.x)  # 7
+print(point1.x)  # 10 у себя
+print(point2.x)  # 7 из класса
 
 Point.x = -15
-print(point1.x)  # 10
-print(point2.x)  # -15
+print(point1.x)  # 10 у себя
+print(point2.x)  # -15 из класса
 
 print(point1.y)  # 4
 print(point2.y)  # 4
@@ -50,5 +50,5 @@ point1.name = 'first instance'
 print(point1.name)
 print(point1)
 print(f'{hex(id(point1)).upper(): >44}')
-
-del point1.y     # Out: AttributeError:
+print(id(point1))
+# del point1.y     # Out: AttributeError:
