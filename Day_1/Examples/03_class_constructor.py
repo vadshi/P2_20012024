@@ -27,7 +27,8 @@ print(point3.y)      # Out: 5
 # AttributeError: type object 'Point' has no attribute 'x'
 # print(Point.x)
 # print(Point.y)
-# Шаблон вызова: объект, имя_атрибута(str)
+
+# # Шаблон вызова: объект, имя_атрибута(str)
 print(hasattr(Point, 'x'))   # Out: False
 print(hasattr(point1, 'x'))  # Out: True
 print(hasattr(point1, 'version'))  # Out: True
@@ -84,3 +85,7 @@ del point1.y
 
 Point.version = 2.0
 print(point1.version)
+print(point2.version)
+print(point3.version)
+print(point4.version)
+print(point5.version)
