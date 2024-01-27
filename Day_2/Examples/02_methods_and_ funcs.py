@@ -12,21 +12,21 @@ import pprint as pp
 # B = MyClass('B')
 #
 #
-# # Создаем функцию с аргументом
+# # Создаем функцию с параметром self
 # def hello(self):
 #     print("Этo экземпляр", self.name, ":hello")
 #
 #
-# # Создаем функцию с аргументом
-# def hi(some_obj):
-#     print(some_obj.name, ":hi")
+# # Создаем функцию с параметром value
+# def hi(value):
+#     print(value.name, ":hi")
 #
 #
 # # Ошибка, потому что у строки нет атрибута name
-# # hello('value')
+# # hello('value') # AttributeError: 'str' object has no attribute 'name'
 #
 # # Здесь ошибки не будет
-# # hello(A)
+# hello(A)
 #
 # # Определяем функцию класса
 # MyClass.say = hello
@@ -63,9 +63,9 @@ import pprint as pp
 # # Теперь мы создаем атрибут у экземпляра
 # A.say = hello
 # print('After:', vars(A))
-#
-# # Обязательно передаем аргумент, потому что
-# # работа идет не через класс МуClass
+# #
+# # # Обязательно передаем аргумент, потому что
+# # # работа идет не через класс МуClass
 # A.say(A)
 # # A.say()  # Error
 # B.say()  # MyClass.say(B)
@@ -77,7 +77,7 @@ import pprint as pp
 # A.say(B)   # Out: B - hello
 #
 # # А здесь класс MyClass используем
-# # B.say(A)   # Out: Error
+# # B.say(A)   # Out: Error  MyClass.say(B, A)
 #
 # # Удаляем функцию класса
 # del MyClass.say
@@ -92,32 +92,32 @@ import pprint as pp
 # B.say()  # AttributeError
 
 # Так можно, но не нужно
-# class Person:
-#     def __init__(some, name):
-#         some.name = name
-#         print(id(some))
-#
-#     def add(self, s: str):
-#         self.name += s
-#         print(f'{self.name = }')
-#         print(id(self))
-#         result = self.third()
-#         print(f'{result = }')
-#
-#     def second(abcd):
-#         abcd.name += ' work'
-#         print(f'{abcd.name = }')
-#         print(id(abcd))
-#
-#     def third(work):
-#         print(id(work))
-#         return work.name[:3]
-#
-#
-# p = Person('Петр')
-# print(id(p))
-# print('Before:', p.name)
-# p.add('!!!')  # Person.add(p)  s = '!!!'
-# print('After:', p.name)
-# p.second()   # Person.second(p)
+class Person:
+    def __init__(some, name):
+        some.name = name
+        print(id(some))
+
+    def add(self, s: str):
+        self.name += s
+        print(f'{self.name = }')
+        print(id(self))
+        result = self.third()  
+        print(f'{result = }')
+
+    def second(abcd):
+        abcd.name += ' work'
+        print(f'{abcd.name = }')
+        print(id(abcd))
+
+    def third(work):
+        print(id(work))
+        return work.name[:3]
+
+
+p = Person('Петр')
+print(id(p))
+print('Before:', p.name)
+p.add('!!!')  # Person.add(self=p)  s = '!!!'
+print('After:', p.name)
+p.second()   # Person.second(abcd=p)
 
