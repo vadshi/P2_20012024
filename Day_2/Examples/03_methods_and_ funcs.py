@@ -19,11 +19,11 @@ A = Foo('A')
 B = Foo('B')
 
 
-# # Вызов метода say()
+# Вызов метода say()
 # A.say()
 # B.say()
-# print(f'{id(A) = }')
-# print(f'id(A) = {hex(id(A)).upper()}')
+# print(f'10:{id(A) = }')
+# print(f'16:id(A) = {hex(id(A)).upper()}')
 #
 # # ВАЖНО, создаем еще один объект, а не ссылку!
 # # Это независимая копия метода
@@ -32,7 +32,7 @@ B = Foo('B')
 # print(S is A.say)  # id(S) == id(A.say)
 # print(type(S), type(A.say))
 # print(id(S), id(A.say))
-#
+# print("before change:", id(A.say))
 # print(hex(id(Foo.say)).upper())
 # print(hex(id(S)).upper())
 # print(hex(id(A.say)).upper())
@@ -41,7 +41,7 @@ B = Foo('B')
 # print(vars(S))
 # print(A.say)
 #
-# # Вызываем
+# # # Вызываем
 # S()
 # C()
 # print(A.name)
@@ -73,7 +73,7 @@ B = Foo('B')
 # A.say()
 #
 # print(f'{id(A) = }')
-# print(f'{id(A.say) = }')
+# print(f'After change: {id(A.say) = }')
 # print(f'{id(S) = }')
 # print(type(S))
 # Foo.say(A)  # A.say()
@@ -83,9 +83,9 @@ B = Foo('B')
 # print(f'{id(Foo.say) = }')
 # D_link = Foo.say
 # print(f'{id(D_link) = }')
-# D_link(Foo('D'))  # Foo.say(Foo instance) Out: Class Foo: D (4) vs
+# D_link(Foo('D'))  # Foo.say(Foo instance) Out: Вспомнить и проверить
 #
-# Foo.say(A)
+# Foo.say(A)  # A.say()
 # print(type(D_link))
 # print(D_link)
 # print(D_link.__name__)
@@ -93,7 +93,7 @@ B = Foo('B')
 # D_link(A)  # work Class Foo: A
 #
 # # Удаляем в классе
-# del Foo.say
+# # del Foo.say
 # # B.say()  # Error -> Foo.say(B)
 # D_link(B)  # work
 #
@@ -105,6 +105,6 @@ B = Foo('B')
 # print(callable(Foo))
 # print('=' * 30)
 #
-# # print(callable(A.say))
+# print(callable(A.say))
 # A.say = 'hello'
 # print(callable(A.say))

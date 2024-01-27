@@ -101,7 +101,7 @@ class Person:
         self.name += s
         print(f'{self.name = }')
         print(id(self))
-        result = self.third()  
+        result = self.third()
         print(f'{result = }')
 
     def second(abcd):
