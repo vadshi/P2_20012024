@@ -35,7 +35,6 @@ class Card:
         return VALUES.index(self.value) < VALUES.index(other_card.value)
 
 
-
 if __name__ == '__main__':
     # # Создадим несколько карт
     card1 = Card("10", "Hearts")
@@ -50,4 +49,8 @@ if __name__ == '__main__':
         print(f"У карт: {card1} и {card2} одинаковые масти")
     else:
         print(f"У карт: {card1} и {card2} разные масти")
+
+    # Проверим методы more() и less()
+    print(card1.more(card2))
+    print(card1.less(card2))
 
