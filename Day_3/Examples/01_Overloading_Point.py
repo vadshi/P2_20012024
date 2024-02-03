@@ -20,7 +20,7 @@ class Point(object):
     # Перегрузка(Переопределение) оператора == (equal)
     def __eq__(self, other: Point):
         # мы будем выполнять оператор == только для точки
-        if type(other) == Point:
+        if type(other) is Point:
             return self.x == other.x and self.y == other.y
         else:
             # мы самостоятельно вызываем ошибку TypeError
@@ -36,7 +36,7 @@ class Point(object):
 
     # Определение оператора > (greater than)
     def __gt__(self, other: Point):
-        # return not self < other # можно и так, если экземпляры не могут быть равны
+        # return not self < other  # можно и так, если экземпляры не могут быть равны
         # Пока лучше все явно прописывать
         if self.x == other.x:
             return self.y > other.y
@@ -60,8 +60,8 @@ def main():
     print('p2=', p2)  # -1 7
     print('p3=', p3)  # 3 1.17
 
-    print('p0 == p1:', p0 == p1)  # True
-    print('the same:', p0.__eq__(p1))
+    # print('p0 == p1:', p0 == p1)  # True
+    # print('the same:', p0.__eq__(p1))
     # Если True -> выполнять код дальше
     # Если False -> ошибка AssertionError
     # Смысл assert
@@ -90,7 +90,7 @@ def main():
     # print('=' * 40)
     #
     # print('p3 < p1', p3 < p1)   # True
-    # assert p3 < p1
+    # assert (p3 < p1)
     # print('p1 < p3', p1 < p3)   # False
     # assert not p1 < p3
     # print('=' * 40)
@@ -98,7 +98,7 @@ def main():
     # print('p1 > p0', p1 > p0)
 
     # можно использовать min, max, sorted
-    # a = [p0, p1, p2, p3]
+    # a = (p0, p1, p2, p3)
     # print(a)
     # pmin = min(a)
     # pmax = max(a)
@@ -106,9 +106,9 @@ def main():
     # print('pmax =', pmax)
     # assert p2 is pmin
     # assert p0 is pmax
-    #
-    # # Функция sorted() принимает в качестве аргумента любую последовательность
-    # # и всегда возвращает список отсортированных элементов
+
+    # Функция sorted() принимает в качестве аргумента любую последовательность
+    # и всегда возвращает список отсортированных элементов
     # b = sorted(a)
     # print(*b, sep=' -> ')  # print(b[0], b[1], b[2], b[3])
     # assert b == [p2, p3, p0, p1]
@@ -117,30 +117,30 @@ def main():
     # pprint('__ne__' in dir(p1))
     # pprint(p1.__class__.__dict__)
     # pprint(Point.__dict__)
-    
+    #
     # ===========
     # error block
     # ===========
-    # beg = Begemot()
-    # print(f'{beg.x = }, {beg.y = }')
+    beg = Begemot()
+    print(f'{beg.x = }, {beg.y = }')
     # print(p0 == beg)   # p0.__eq__(beg) Out: TypeError
     # print(p0 != beg)   # Out: TypeError
 
     # Механизм работы: beg.__gt__(p0) -> p0.__lt__(beg)
-    # print(beg > p0)  
-    # print(type(beg))
-    # print(type(p0))
-    # print(p0.__lt__(beg))  # True
-    # print(beg.__gt__(p0))  # NotImplemented
+    print(beg > p0)
+    print(type(beg))
+    print(type(p0))
+    print(p0.__lt__(beg))  # True
+    print(beg.__gt__(p0))  # NotImplemented
 
-    # beg1 = Begemot()
+    beg1 = Begemot()
     # print(beg1 == p0)  # p0.__eq__(beg) Error
-    #
+
     # True if x is y else NotImplemented
     # Результат вызова метода __eq__() NotImplemented,
-    # # потому что мы его не переопределили и id(beg) != id(beg1)
-    # print(beg.__eq__(beg1))  # NotImplemented
-    # print(beg is beg)  # id(beg) == id(beg)
+    # потому что мы его не переопределили и id(beg) != id(beg1)
+    print(beg.__eq__(beg1))  # NotImplemented
+    print(beg is beg)  # id(beg) == id(beg)
 
 
 if __name__ == '__main__':
