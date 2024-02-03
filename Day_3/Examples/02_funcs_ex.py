@@ -12,22 +12,22 @@ from collections.abc import Callable
 def func(text: str) -> str:
     return text.upper() + '!'
 
-
+#
 # print(id(func))
 # print(func('привет'))
 bar = func  # Ссылка на func
 # print(type(bar), id(bar))
 # print(bar('пока'))
-
-# Можно удалить func, но bar будет вызываться
+#
+# # Можно удалить func, но bar будет вызываться
 # del func
-# print(func('textest'))  # Out -> Error
-
+# # print(func('textest'))  # Out -> Error
+#
 # print(bar('Я работаю'))
 # print(bar.__name__)
 # print(id(bar))
 #
-# # ## Можно хранить функции в структурах данных
+# # # ## Можно хранить функции в структурах данных
 # funcs = [bar, str.lower, str.capitalize]
 # print(funcs)
 #
@@ -50,19 +50,21 @@ bar = func  # Ссылка на func
 # print(d['third']('foo'))
 
 
-# ## Передача функции в качестве аргумента в другую функцию
-# def greet(fun: Callable) -> None:
-#     greeting = fun('Программа на Python')
+# # ## Передача функции в качестве аргумента в другую функцию
+# def greet(param_name: Callable) -> None:
+#     greeting = param_name('Программа на Python')
 #     print(greeting)
 #
 #
-# # # ## Вызов функции greet с аргументом - функцией bar
+# # # # ## Вызов функции greet с аргументом - функцией bar
 # greet(bar)
 # # greet('hello')  # Error
 # print(callable(bar))  # есть реализация __call__()
 # print(callable('hello'))
 # print(bar.__call__("hello"))  # bar('hello')
-# print(callable(int))
+# print(callable(int))  # True
+# a = 5
+# print(callable(a))  # False
 #
 #
 # # Вторая функция для примера
@@ -86,12 +88,12 @@ bar = func  # Ссылка на func
 # ===
 # print(map(bar, ['hello', 'hi', 'привет']))
 # print(set(map(bar, ['hello', 'hi', 'привет'])))
-# # numbers = list(map(int, input("Enter: ").split()))
-# # print(numbers)
-# # strings = tuple(map(bar, input("Enter: ").split(maxsplit=2)))
-# # print(strings)
+# numbers = list(map(int, input("Enter: ").split()))
+# print(numbers)
+# strings = tuple(map(bar, input("Enter: ").split(maxsplit=2)))
+# print(strings)
 #
-# # ## Здесь действует распаковка
+# ## Здесь действует распаковка
 # a = map(float, input("Enter: ").split())
 # print(f'{a = }')
 # print(next(a))  # a.__next__()
@@ -100,8 +102,8 @@ bar = func  # Ссылка на func
 #
 # a, b = map(float, input("Enter: ").split())
 # print(f'{a = }, {b = }')
-
-# Здесь отработает
+#
+# # Здесь отработает
 # print(*map(int, '4 8'.split()))
 
 # print(list(map(len, ['hello', 'hi', 'привет'])))
@@ -111,11 +113,12 @@ bar = func  # Ссылка на func
 # ======
 # def condition(text):
 #     return len(text) > 3
-#
-#
-# # Включаем элемент в итоговый список, если результат работы
-# # функции condition True
+
+
+# Включаем элемент в итоговый список, если результат работы
+# функции condition True
 # print(list(filter(condition, ['hello', 'hi', 'привет'])))
+
 # # Если первый аргумент None, то в итоговую выдачу попадут только truthy values
 # print(tuple(filter(None, [True, 5, 0, '', 8.2, 'hello', False])))
 
@@ -143,10 +146,10 @@ bar = func  # Ссылка на func
 # c = list(range(101, 120))
 # d = 'hello python'
 # print(list(zip(a, b, c, d)))
-
-# Пример на понимание работы словаря
+#
+# # Пример на понимание работы словаря
 # d = dict(zip('pythonpy', range(8)))
-# print(len(d))  # ???
+# print(len(d))
 # print(d)
 
 # =========
