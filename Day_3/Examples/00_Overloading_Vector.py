@@ -12,13 +12,16 @@ from pprint import pprint
 
 
 class Vector:
-    def __init__(self, pos):  # Какой тип данных может быть у pos? 
+    def __init__(self, pos: list | tuple):  # Какой тип данных может быть у pos? list, tuple, dict, str, range
         self.x = pos[0]
         self.y = pos[1]
 
     # Реализация оператора +, неявный метод
     # При вызове v1+v2 отработает v1.__add__(v2)
     def __add__(self, other: Vector) -> Vector:
+        return Vector((self.x + other.x, self.y + other.y))
+
+    def __radd__(self, other: Vector) -> Vector:
         return Vector((self.x + other.x, self.y + other.y))
 
     # Это явный метод
@@ -46,37 +49,41 @@ v1 = Vector((10, 15))
 v2 = Vector((12, 10))
 
 # Явно вызываем явный метод
-# print(v1.add(v2))
+print(v1.add(v2))
 #
 # Наши объекты участвуют в операции сложения (+)
 # Благодаря реализации и перегрузке, мы можем использовать более удобную и привычную запись:
-# v3 = v1 + v2       # v1.__add__(v2)
-# print('v3 =', v3)  # v3.__str__()
+v3 = v1 + v2       # v1.__add__(v2)
+print('v3 =', v3)  # v3.__str__()
 
 # На самом деле это работает так:
-# v4 = v1.__add__(v2)
-# print(f'{v4 = !s}')
+v4 = v1.__add__(v2)
+print(f'{v4 = !s}')
 
 # v4 = v1 - v2  # TypeError: unsupported operand type(s) for -: 'Vector'
-#
-# # =========
-# # Проясняем
-# # =========
-# slonik = Slon()
-# something = v1 + slonik  # v1.__add__(slonik) 
 
-# some_v2 = slonik + v2   # slonik.__add__(v2)  
+# =========
+# Проясняем
+# =========
+slonik = Slon()
+something = v1 + slonik  # v1.__add__(slonik)
+print(f'{something = !s}')
 
 
-# # Функция print() для получения строки для вывода вызывает методы __str__()
-# print('v3 + v3 =', v3 + v3)
-# print('Repr of v3 = ', repr(v3))
-# print(f'{v3!r}')  # __repr__()
-# print(f'{v3!s}')  # __str__()
+some_v2 = slonik + v2   # slonik.__add__(v2)
+print(f'{some_v2 = !s}')
+# ВАЖНО. Если бы был реализован метод __radd__, то этот код отработал бы.
+
+
+# Функция print() для получения строки для вывода вызывает методы __str__()
+print('v3 + v3 =', v3 + v3)
+print('Repr of v3 = ', repr(v3))
+print(f'{v3!r}')  # __repr__()
+print(f'{v3!s}')  # __str__()
 
 
 v8 = v1
 # Без перегрузки оператора ==, сравниваются id двух объектов
 print(v1 == v8)   # id(v1) == id(v8)
-print(v1.__eq__(v2))
+print(v1.__eq__(v2))  # ==
 
