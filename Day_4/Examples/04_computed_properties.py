@@ -53,3 +53,5 @@ s.name = 'Petr'
 print(s.__dict__)
 print(f'{s.full_name = }')
 print(s.__dict__)
+
+print('Repeat:', s.full_name)
