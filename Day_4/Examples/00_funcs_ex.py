@@ -164,10 +164,10 @@ del func
 #     def inner(num2):
 #         return num1 * num2
 #     return inner
-#
-#
-# mult_by_9 = multiply(9)
-# mult_by_10 = multiply(10)
+
+
+# mult_by_9 = multiply(9)   # Это ссылка на inner
+# mult_by_10 = multiply(10)  # Это другая ссылка на inner
 #
 # # Это разные объекты
 # print(id(mult_by_9), id(mult_by_10))
@@ -190,39 +190,41 @@ del func
 # print(mult_by_9.__code__.co_freevars)
 # print(mult_by_9.__code__.co_name)
 #
-# # # Исходный код функции
+# # Исходный код функции
 # import inspect as ins
 # print(ins.getsource(mult_by_9.__code__))
 
-#==================
+# =================
 # Области видимости
-# Local -> Enclosed -> Global -> Builtin (LEGB)
+# =================
+# Local -> Enclosed -> Global -> Builtins (LEGB)
 # Вложенные функции
 # a = 10
 # def main(text: str):
 #     # print(a)
-#     a = 5
+#     # a = 5
 #     def inner_func(text_1: str) -> str:
 #         # Доступ к переменной a в функции main
-#         nonlocal a
+#         # nonlocal a
 #         # Доступ к глобальной переменной a
 #         # global a
 #         print(a)
 #         print(locals())  # Словарь локальных переменных
-#         a += 1  # a = a + 1
+#         # a += 1  # a = a + 1
 #         return text_1.lower() + '...' + f'{a}'
 #     # Словарь локальных переменных
-# #     print(locals())
+#     # print(locals())
 #     return inner_func(text)
-
+#
+#
 # print(main('Привет, Всем '))
 # print(f'{a = }')
-# #
+
 # print(inner_func('Может работает?')) # Error
 # print(main.inner_func) # Error
 
 
-# Результат работы функции main это идентификатор на функцию,
+# Результат работы функции main_imp это идентификатор на функцию,
 # которая выбирается в зависимости от значения аргумента
 # def main_imp(size: int):
 #     def foo(text):
@@ -263,31 +265,33 @@ del func
 #
 #
 # # Вызываем подряд две функции
-# print(main_imp_2(10, 'TEST')())  # foo()
+# print(main_imp_2(10, 'TEST'))  # foo()
 # print(main_imp_2(3)())  # Вызвали bar()
 
 
-# Лямбды. Нельзя делать связывание в теле функции
+# Лямбды(Анонимные функции).
+# Нельзя делать связывание в теле функции
 # Лямбды возвращает только одно значение
-# add = lambda x, y: x + y
+# add = lambda x, y: 3 * x ** 2 + 5 * y + 100
 # print(add(2, 3), type(add))
 # print(add)
 #
-# # # # ### Вызов лямбды с аргументами
+# # # ### Вызов лямбды с аргументами
 # print((lambda x, y: x + y)(10, 16))
-
-# Можно, но не нужно
+#
+# # Можно, но не нужно
 # print((lambda *args, **kwargs: (args, kwargs))(4, 5, b='hello', c='hi'))
 # print((lambda *args, **kwargs: (args, kwargs))(41, 51))
 #
-# # Пример функции с любым количеством аргументов
-# # args - это кортеж позиционных аргументов
-# # kwargs - это словарь именованные аргументов
+#
+# # # Пример функции с любым количеством аргументов
+# # # args - это кортеж позиционных аргументов
+# # # kwargs - это словарь именованные аргументов
 # def func_1(*args, **kwargs):
 #     print(args, kwargs)
-
-
-# # Одна и та же функция, но с использованием lambda
+#
+#
+# # # Одна и та же функция, но с использованием lambda
 # def multiply(num1):
 #     return lambda num2: num1 * num2
 #
@@ -298,24 +302,26 @@ del func
 # print(mul_10(20))
 
 # lambda в качестве значения аргумента key
-def new_order(x):
-    return x[1]
-
-
-list_of_tuples = [(1, 'd'), (2, 'b'), (4, 'a'), (3, 'c')]
-
-# sorted принимает как аргумент последовательность и всегда возвращает список
+# def new_order(x):
+#     return x[1]
+#
+#
+# list_of_tuples = [(1, 'd'), (2, 'b'), (4, 'a'), (3, 'c')]
+#
+# # sorted принимает как аргумент последовательность и всегда возвращает список
 # print(sorted(list_of_tuples))
 #
 # # ## Сортировка по второму значению кортежей
 # print(sorted(list_of_tuples, key=lambda x: x[1]))
 # print(sorted(list_of_tuples, key=new_order))
-# Out: [(4, 'a'), (2, 'b'), (3, 'c'), (1, 'd')]
-
-# # 0 1 1 4 4 9 9 16 16 25 25 - ключ(критерий) сортировки
-# print(sorted(range(-5, 6), key=lambda x: x * x))
-# print(sorted(range(5, -6, -1), key=lambda x: x * x))
+# # Out: [(4, 'a'), (2, 'b'), (3, 'c'), (1, 'd')]
 #
+# # # 0 1 1 4 4 9 9 16 16 25 25 - результат сортировки работы ключа(критерия)
+# print(sorted(range(-5, 6), key=lambda x: x * x))
+# # Вспомнить всё и проверить
+#
+# print(sorted(range(5, -6, -1), key=lambda x: x * x))
+# # Это пример с lambda
 # print(sorted('hello', key=lambda x: ord(x) % 10))
 
 
@@ -329,13 +335,13 @@ list_of_tuples = [(1, 'd'), (2, 'b'), (4, 'a'), (3, 'c')]
 # print(min(s.split(), key=len))  # Out: go
 # print(min(s.split(), key=lambda x: x.count('o')))  # java
 # #
-# print(max(s.split(), key=lambda x: x.count('o')))  # hello
+# print(max(s.split(), key=lambda x: x.count('g')))  # golang
 # print(max(s.split(), key=lambda x: x.count('h')))  # hello
 # #
 # print(min(s.split(), key=lambda x: x.count('n') + len(x)))  # go
 #
 # print(min(range(13, 20), key=lambda x: x % 3))  # 15
-# print(max(range(20), key=lambda x: x % 3))  # 2
+# print(max(range(6, 20), key=lambda x: x % 3))  # 8
 
 
 

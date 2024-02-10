@@ -7,13 +7,12 @@ class Player:
         self.cards.extend(cards_in)
 
 class Game:
-	def __init__(self):
-		self.deck = Deck()
-		self.deck.shuffle()
-		self.attacker = Player('John')
+    def __init__(self):
+        self.deck = Deck()
+        self.deck.shuffle()
+        self.attacker = Player('John')
         self.attacker.take(self.deck.draw(10))
-		
-	def round(self):
+
+    def round(self):
         while conditions:
             pass
-		
