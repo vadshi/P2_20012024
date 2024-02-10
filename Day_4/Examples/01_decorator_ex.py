@@ -8,32 +8,33 @@
 # ==========
 # Декораторы
 # ==========
-def null_decorator(func):
-    return func
-
-
-def greet():
-    return 'Привет!'
-
-
-# Механизм работы декоратора
+# def null_decorator(func):
+#     return func
+#
+#
+# def greet():
+#     return 'Привет!'
+#
+#
+# # Механизм работы декоратора
 # print("Before:")
 # print(greet())
 # greet = null_decorator(greet)
 # print("After:")
 # print(greet())
-
-# Функция декоратор
-def uppercase(func):
-    def wrapper():
-        original_result = func()
-        modified_result = "<<<< " + original_result.upper() + " >>>>"
-        return modified_result
-    return wrapper
-
-
-# Декоратор
-# @uppercase  # тоже самое, что и greet_eng = uppercase(greet_eng)
+#
+#
+# # Функция декоратор
+# def uppercase(func):
+#     def wrapper():
+#         original_result = func()
+#         modified_result = "<<<< " + original_result.upper() + " >>>>"
+#         return modified_result
+#     return wrapper
+#
+#
+# # Декоратор
+# # @uppercase  # тоже самое, что и greet_eng = uppercase(greet_eng)
 # def greet_eng() -> str:
 #     return 'Hello!'
 #
@@ -48,23 +49,25 @@ def uppercase(func):
 # print(greet_eng())
 # print(null_decorator(greet))
 # print(uppercase(greet))
-
-# Функция декоратор
-def other(func):
-    # Кладем все аргументы декорируемой функции
-    # в функцию wrapper
-    def wrapper(*args, **kwargs):
-        print(f'{args = }')
-        print(f'{kwargs = }')
-        original_result = func(*args, **kwargs)
-        modified_result = original_result - 100
-        return modified_result
-    return wrapper
-
-
-# Переопределяем встроенную функцию sum
+#
+#
+# # Функция декоратор
+# def other(func):
+#     # Кладем все аргументы декорируемой функции
+#     # в функцию wrapper
+#     def wrapper(*args, **kwargs):
+#         print(f'{args = }')
+#         print(f'{kwargs = }')
+#         original_result = func(*args, **kwargs)
+#         modified_result = original_result - 100
+#         return modified_result
+#     return wrapper
+#
+#
+# # Переопределяем встроенную функцию sum
 # sum = other(sum)
 # print(sum((100, 100), start=1000))
+
 
 # Применение нескольких декораторов
 def strong(func):
@@ -84,14 +87,15 @@ def emphasis(func):
 # @emphasis  # Первый по порядку
 # def greet2():
 #     return 'Привет!'
-#
-#
+
+
 # print(greet2())
 #
 # # Без сахара
 # greet2 = strong(emphasis(greet2))
 # print(greet2())
-# #
+
+
 # Функция декоратор
 # def trace(func):
 #     def wrapper(*args, **kwargs):
@@ -100,12 +104,12 @@ def emphasis(func):
 #         original_result = func(*args, **kwargs)
 #         print(f'ТРАССИРОВКА: {func.__name__}() '
 #               f'вернула {original_result!r}')
-#         return '!!!! ' + original_result + ' !!!!'
+#         return 'Change> ' + original_result + ' !!!!'
 #     return wrapper
 #
 #
 # @trace
-# def say(name, line):
+# def say(name, line) -> str:
 #     return f'{name * 3}: {line} as is'
 #
 #
