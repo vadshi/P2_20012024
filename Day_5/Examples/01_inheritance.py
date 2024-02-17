@@ -49,6 +49,7 @@
 #
 #
 # student1 = Student('Ivan', 'Petrov', '01.01.1990', 111, "1 A")
+# print(student1.name)
 # print(student1.class_room)
 # student1.next_class()
 # print(student1.class_room)
@@ -61,20 +62,20 @@
 # Но часть информации у них общая(атрибуты, методы)
 
 
-# # Общую информацию выносим в Класс-предок (родитель)
-# class Person(object):
-#     def __init__(self, name, surname, birth_date, school):
-#         self.name = name
-#         self.surname = surname
-#         self.birth_date = birth_date
-#         self.school = school
-#
-#     @property
-#     def get_full_name(self):
-#         return self.name + ' ' + self.surname
-#
-#     def set_name(self, new_name):
-#         self.name = new_name
+# Общую информацию выносим в Класс-предок (родитель)
+class Person(object):
+    def __init__(self, name, surname, birth_date, school):
+        self.name = name
+        self.surname = surname
+        self.birth_date = birth_date
+        self.school = school
+
+    @property
+    def get_full_name(self):
+        return self.name + ' ' + self.surname
+
+    def set_name(self, new_name):
+        self.name = new_name
 
 
 # =========================
