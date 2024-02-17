@@ -1,5 +1,5 @@
 # Класс Предок
-class Super:
+class Super(object):
     # Стандартное поведение
     def method(self):
         print('in Super.method')
@@ -26,7 +26,7 @@ class Provider(Super):
 
 
 # Полное замещение метода в Replacer.method (добавить Provider)
-class Replacer(Super):
+class Replacer(Provider, Super):
     def method(self):
         print('in Replacer.method')
 
@@ -45,24 +45,24 @@ class Extender(Super):
 
 
 if __name__ == '__main__':
-    for klass in (Inheritor, Replacer, Extender):
-        print(klass)  # class or instance? Классы vs Экземпляры
-        print('\n' + klass.__name__ + '...')
-        # Inheritor().method(), Replacer().method(), Extender().method()
-        klass().method()
-        print('=' * 40)
+    # for klass in (Inheritor, Replacer, Extender):
+    #     print(klass)  # class or instance? Классы vs Экземпляры
+    #     print('\n' + klass.__name__ + '...')
+    #     # Inheritor().method(), Replacer().method(), Extender().method()
+    #     klass().method()
+    #     print('=' * 40)
 
-    # print('Provider...')
-    # p = Provider()
-    # p.delegate()  # двойная пробежка
-    # # i = Inheritor()
-    # # i.first()  # AssertionError:
+    print('Provider...')
+    p = Provider()
+    p.delegate()  # двойная пробежка
+    # i = Inheritor()
+    # i.first()  # AssertionError:
     # # print('done')
-    # r = Replacer()
-    # r.first()
-    # # r.delegate()
-    # # e = Extender()
-    # # e.first()  # AssertionError:
+    r = Replacer()
+    r.first()
+    # r.delegate()
+    # e = Extender()
+    # e.first()  # AssertionError:
     #
-    # # MRO - method resolution order
-    # print(r.__class__.__mro__)
+    # MRO - method resolution order
+    print(r.__class__.__mro__)
